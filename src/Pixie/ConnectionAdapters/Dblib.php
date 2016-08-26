@@ -12,7 +12,7 @@ class Dblib extends BaseAdapter
         // @see http://php.net/manual/en/ref.pdo-dblib.connection.php
         $connectionString = "dblib:host={$config['host']}";
 
-        if (isset($config['port'])) {
+        if (isset($config['port']) && !empty($config['port'])) {
             $connectionString .= ":{$config['port']}";
         }
 
