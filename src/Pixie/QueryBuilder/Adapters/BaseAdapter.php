@@ -64,9 +64,11 @@ abstract class BaseAdapter
             }
         }
 
-        // Limit and offset
+        /*// Limit and offset
         $limit = isset($statements['limit']) ? 'LIMIT ' . $statements['limit'] : '';
-        $offset = isset($statements['offset']) ? 'OFFSET ' . $statements['offset'] : '';
+        $offset = isset($statements['offset']) ? 'OFFSET ' . $statements['offset'] : '';*/
+
+        $limitOffest = $this->getLimitOffset($statements);
 
         // Having
         list($havingCriteria, $havingBindings) = $this->buildCriteriaWithType($statements, 'havings', 'HAVING');
@@ -76,6 +78,7 @@ abstract class BaseAdapter
 
         $sqlArray = array(
             'SELECT' . (isset($statements['distinct']) ? ' DISTINCT' : ''),
+            isset($limitOffest['top']) ? $limitOffest['top'] : '',
             $selects,
             'FROM',
             $tables,
@@ -84,8 +87,8 @@ abstract class BaseAdapter
             $groupBys,
             $havingCriteria,
             $orderBys,
-            $limit,
-            $offset
+            isset($limitOffest['limit']) ? $limitOffest['limit'] : '',
+            isset($limitOffest['offset']) ? $limitOffest['offset'] : ''
         );
 
         $sql = $this->concatenateQuery($sqlArray);
@@ -533,5 +536,13 @@ abstract class BaseAdapter
         }
 
         return $sql;
+    }
+
+    protected function getLimitOffset($statements){
+        // Limit and offset
+        $limit = isset($statements['limit']) ? 'LIMIT ' . $statements['limit'] : '';
+        $offset = isset($statements['offset']) ? 'OFFSET ' . $statements['offset'] : '';
+
+        return compact('limit', 'offset');
     }
 }
