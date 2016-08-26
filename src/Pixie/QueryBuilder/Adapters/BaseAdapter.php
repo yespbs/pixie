@@ -542,7 +542,7 @@ abstract class BaseAdapter
         return $sql;
     }
 
-    public function getLimitOffset($statements){
+    protected function getLimitOffset($statements){
         // Limit and offset
         $limit = isset($statements['limit']) ? 'LIMIT ' . $statements['limit'] : '';
         $offset = isset($statements['offset']) ? 'OFFSET ' . $statements['offset'] : '';
