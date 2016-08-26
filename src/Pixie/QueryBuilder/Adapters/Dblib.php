@@ -11,8 +11,6 @@ class Dblib extends BaseAdapter
         // Limit and offset
         $top = isset($statements['limit']) ? 'TOP ' . $statements['limit'] : '';
 
-        pr($statements);
-        
         return compact('top');
     }
 }
