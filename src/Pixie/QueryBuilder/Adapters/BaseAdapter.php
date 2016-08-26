@@ -70,6 +70,8 @@ abstract class BaseAdapter
 
         $limitOffest = $this->getLimitOffset($statements);
 
+        print_r($limitOffest);
+
         // Having
         list($havingCriteria, $havingBindings) = $this->buildCriteriaWithType($statements, 'havings', 'HAVING');
 
