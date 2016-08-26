@@ -29,13 +29,4 @@ class Dblib extends BaseAdapter
 
         return $connection;
     }
-
-    public function getLimitOffset($statements){
-        // Limit and offset
-        $top = isset($statements['limit']) ? 'TOP ' . $statements['limit'] : '';
-
-        pr($statements);
-
-        return compact('top');
-    }
 }
